@@ -1,0 +1,3 @@
+include ':BaseArchitect'
+include ':app'
+rootProject.name = "Vodafone Test"
