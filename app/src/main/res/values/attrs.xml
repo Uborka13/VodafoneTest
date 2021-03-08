@@ -5,6 +5,7 @@
         <attr name="hintText" format="string"/>
         <attr name="pattern" format="string" />
         <attr name="android:inputType" />
+        <attr name="passwordToggle" format="boolean" />
     </declare-styleable>
 
 </resources>

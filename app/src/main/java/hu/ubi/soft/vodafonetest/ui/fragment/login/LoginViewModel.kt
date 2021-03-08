@@ -11,24 +11,33 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: Repository): BaseViewModel<LoginUIModel, LoginActions>(::LoginUIModel) {
+class LoginViewModel @Inject constructor(
+    private val repository: Repository
+) :
+    BaseViewModel<LoginUIModel, LoginActions>(::LoginUIModel) {
     override fun handleActions(action: LoginActions) {
         viewModelScope.launch {
-            when(action) {
+            when (action) {
                 is Login -> login(action)
             }
         }
     }
 
     private suspend fun login(action: Login) {
+        setLoadingState(action)
         repository.postLogin(action.loginCredentials)
             .catch { setError(it.message, action) }
             .collect {
+                repository.saveCreds(
+                    action.loginCredentials.loginName,
+                    it.accessToken,
+                    it.refreshToken
+                )
                 setSuccessState(action)
             }
     }
 
 }
 
-sealed class LoginActions: UIActions
-data class Login(val loginCredentials: LoginUIModel): LoginActions()
+sealed class LoginActions : UIActions
+data class Login(val loginCredentials: LoginUIModel) : LoginActions()

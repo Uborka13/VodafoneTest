@@ -1,6 +1,7 @@
 package hu.ubi.soft.vodafonetest.network
 
 import hu.ubi.soft.vodafonetest.model.LoginRequest
+import hu.ubi.soft.vodafonetest.model.LoginResponse
 import hu.ubi.soft.vodafonetest.model.NetOffersResponse
 import okhttp3.ResponseBody
 import retrofit2.http.Body
@@ -10,7 +11,7 @@ import retrofit2.http.POST
 interface Services {
 
     @POST("/login")
-    suspend fun postLogin(@Body loginRequest: LoginRequest): ResponseBody
+    suspend fun postLogin(@Body loginRequest: LoginRequest): LoginResponse
 
     @GET("/net/offers")
     suspend fun getNetOffers(): NetOffersResponse

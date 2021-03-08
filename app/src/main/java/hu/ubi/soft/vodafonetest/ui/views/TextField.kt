@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import hu.ubi.soft.vodafonetest.R
@@ -15,11 +16,12 @@ class TextField(context: Context, attributeSet: AttributeSet) :
     private val textInputLayout: TextInputLayout
     private val textInputEditText: TextInputEditText
     private val pattern: String?
+    private val hintText: String?
     var textFieldValue: String?
         get() : String? {
             return textInputEditText.text?.let {
                 if (this.visibility != View.GONE && it.isNotBlank()) {
-                    it.toString()
+                    it.trim().toString()
                 } else {
                     null
                 }
@@ -40,6 +42,14 @@ class TextField(context: Context, attributeSet: AttributeSet) :
             textInputEditText.typeface = Typeface.DEFAULT
         }
         pattern = attributes.getString(R.styleable.TextField_pattern)
+        hintText = attributes.getString(R.styleable.TextField_hintText)
+        val passwordToggleEnabled =
+            attributes.getBoolean(R.styleable.TextField_passwordToggle, false)
+        if (passwordToggleEnabled) textInputLayout.endIconMode = END_ICON_PASSWORD_TOGGLE
+        textInputLayout.hint = hintText
+        textInputEditText.doAfterTextChanged {
+            clearError()
+        }
         attributes.recycle()
     }
 
@@ -55,12 +65,22 @@ class TextField(context: Context, attributeSet: AttributeSet) :
         return textInputEditText.text?.toString()?.isBlank() == true
     }
 
-    private fun isTextFieldPatternValid() : Boolean {
+    private fun isTextFieldPatternValid(): Boolean {
         pattern?.let {
             return it.toRegex().matches(textInputEditText.text?.toString() ?: "")
         } ?: run {
             return true
         }
+    }
+
+    fun displayError(error: String) {
+        textInputLayout.error = error
+        textInputLayout.isErrorEnabled = true
+    }
+
+    private fun clearError() {
+        textInputLayout.error = ""
+        textInputLayout.isErrorEnabled = false
     }
 
 }

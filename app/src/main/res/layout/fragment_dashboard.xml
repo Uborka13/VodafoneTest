@@ -1,6 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:overScrollMode="never">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivVodafoneLogo"
+            android:layout_width="66sp"
+            android:layout_height="66sp"
+            android:layout_marginStart="@dimen/margin_m"
+            android:layout_marginTop="@dimen/margin_m"
+            android:src="@drawable/ic_vodafone_logo_filled"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWelcomeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_s"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/ivVodafoneLogo"
+            app:layout_constraintTop_toTopOf="@id/ivVodafoneLogo"
+            tools:text="Hello\nMarci" />
+
+        <Spinner
+            android:id="@+id/sOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvUsageInfoMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_s"
+            android:layout_marginTop="80dp"
+            android:text="Your actual data usage:"
+            app:layout_constraintEnd_toEndOf="@id/sbUsage"
+            app:layout_constraintStart_toStartOf="@id/sbUsage"
+            app:layout_constraintTop_toBottomOf="@id/ivVodafoneLogo" />
+
+        <TextView
+            android:id="@+id/tvActualUsage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_s"
+            app:layout_constraintBottom_toTopOf="@id/sbUsage"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="300 MB" />
+
+        <TextView
+            android:id="@+id/tvTotalUsage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_s"
+            app:layout_constraintEnd_toEndOf="@id/sbUsage"
+            app:layout_constraintTop_toBottomOf="@id/sbUsage"
+            tools:text="300 MB" />
+
+        <SeekBar
+            android:id="@+id/sbUsage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/vodafone_red"
+            android:scaleY="3"
+            android:thumb="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/fabRefill"
+            app:layout_constraintEnd_toStartOf="@id/fabRefill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fabRefill"
+            tools:progress="50" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabRefill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_s"
+            android:elevation="0dp"
+            android:src="@drawable/ic_add"
+            android:text="Offers"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/vodafone_red"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_add"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvUsageInfoMessage"
+            app:maxImageSize="32dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRefillOffers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_s"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fabRefill" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/vodafone_red"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivVodafoneLogo" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/contentGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvUsageInfoMessage, tvActualUsage, tvTotalUsage, sbUsage, fabRefill" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

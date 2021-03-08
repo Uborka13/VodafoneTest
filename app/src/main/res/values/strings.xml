@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Vodafone Test</string>
+    <string name="lbl_terms_and_conditions">Terms and Conditions</string>
+    <string name="lbl_login_name_hint">Email or username</string>
+    <string name="lbl_login_name_error_text">At least one character</string>
+    <string name="lbl_password_hint">Password</string>
+    <string name="lbl_password_error_text">Min 8 characters, English alphabet with at least one number, letter, and upper case characters</string>
+    <string name="lbl_login_button_text">Login</string>
+    <string name="lbl_welcome_message_text">Hello\n%s</string>
+    <string name="lbl_refill_offers_one_time">One time</string>
+    <string name="lbl_refill_offers_renewable">Renewable</string>
+    <string name="lbl_refill_with">Refill (%d Ft)</string>
+    <string name="lbl_buy_with">Buy (%d Ft)</string>
+    <string name="lbl_cancel_refill">Cancel recurring data package</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_no_thanks">No thanks</string>
+    <string name="lbl_go_to_dashboard">Go to dashboard</string>
+    <string name="lbl_confirmation_message">Are you sure you want to activate %s</string>
+    <string name="lbl_successful_message_title">Successful\n%s</string>
+    <string name="lbl_successful_message_body">You have successfully added %s to your account</string>
+    <string name="lbl_unsuccessful_message_title">Unsuccessful activation\n%s</string>
+    <string name="lbl_pick_another_option">Pick an other option</string>
+    <string name="lbl_vodafone_name">Vodafone</string>
 </resources>
